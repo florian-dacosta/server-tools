@@ -22,38 +22,45 @@
 from openerp.osv.orm import Model
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 import StringIO
 import base64
-import time
+import datetime
+import re
 
 
-PROHIBITED_WORDS = [
-    'delete',
-    'drop',
-    'insert',
-    'alter',
-    'truncate',
-    'execute',
-]
+
 
 
 class SqlExport(Model):
     _name = "sql.export"
     _description = "SQL export"
 
+    PROHIBITED_WORDS = [
+        'delete',
+        'drop',
+        'insert',
+        'alter',
+        'truncate',
+        'execute',
+        'create',
+        'update'
+    ]
+
     def _check_query_allowed(self, cr, uid, ids, context=None):
         for obj in self.browse(cr, uid, ids, context=context):
-            if any(word in obj.query.lower() for word in PROHIBITED_WORDS):
-                return False
-            if obj.query.strip().split(' ')[0].lower() != 'select':
-                return False
+            query = obj.query.lower()
+            for word in self.PROHIBITED_WORDS:
+                expr = r'\b%s\b' % word
+                is_not_safe = re.search(expr, query)
+                if is_not_safe:
+                    return False
         return True
 
     def _get_editor_group(self, cr, uid, *args):
-        gr_obj = self.pool.get('res.groups')
-        editor_ids = gr_obj.search(
-            cr, uid, [('name', '=', 'Sql Request Editor')])
-        return editor_ids
+        model_data_obj = self.pool['ir.model.data']
+        return [model_data_obj.get_object_reference(
+            cr, uid, 'sql_export', 'group_sql_request_editor')[1]]
 
     _columns = {
         'name': fields.char('Name', required=True),
@@ -61,7 +68,10 @@ class SqlExport(Model):
             'Query',
             required=True,
             help="You can't use the following word : delete, drop, create, "
-                 "insert, alter, truncate, execute."),
+                 "insert, alter, truncate, execute, update"),
+        'copy_options': fields.char(
+            'Copy Options',
+            required=True),
         'group_ids': fields.many2many(
             'res.groups',
             'groups_sqlquery_rel',
@@ -78,6 +88,7 @@ class SqlExport(Model):
 
     _defaults = {
         'group_ids': _get_editor_group,
+        'copy_options': "CSV HEADER DELIMITER ';'",
     }
 
     _constraints = [(_check_query_allowed,
@@ -88,10 +99,14 @@ class SqlExport(Model):
         if not context:
             context = {}
         for obj in self.browse(cr, uid, ids, context=context):
-            now = time.strftime('%Y-%m-%d', time.localtime())
+            today = datetime.datetime.now()
+            today_tz = fields.datetime.context_timestamp(
+                cr, uid, today, context=context)
+            date = today_tz.strftime(DEFAULT_SERVER_DATETIME_FORMAT)
+            print DEFAULT_SERVER_DATETIME_FORMAT, "jj", date
             output = StringIO.StringIO()
-            query = "COPY (" + obj.query.strip() + \
-                    ") TO STDOUT WITH CSV HEADER DELIMITER ';'"
+            query = "COPY (" + obj.query + ")  TO STDOUT WITH " + \
+                    obj.copy_options
             cr.copy_expert(query, output)
             output.getvalue()
             new_output = base64.b64encode(output.getvalue())
@@ -100,7 +115,7 @@ class SqlExport(Model):
                 cr, uid,
                 {
                     'file': new_output,
-                    'file_name': obj.name + '_' + now + '.csv'})
+                    'file_name': obj.name + '_' + date + '.csv'})
             cr.commit()
         return {
             'view_type': 'form',

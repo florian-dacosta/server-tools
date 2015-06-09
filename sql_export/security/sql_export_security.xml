@@ -14,7 +14,7 @@
         <field eval="0" name="perm_create"/>
         <field eval="0" name="perm_write"/>
         <field eval="0" name="perm_unlink"/>
-        <field name="domain_force">['|', ('user_ids','=',user.id), ('group_ids','=', [x.id for x in user.groups_id])]</field>
+        <field name="domain_force">['|', ('user_ids','=',user.id), ('group_ids','in', [x.id for x in user.groups_id])]</field>
     </record>
 
 </data>

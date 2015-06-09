@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-08 11:47+0000\n"
-"PO-Revision-Date: 2015-06-08 11:47+0000\n"
+"POT-Creation-Date: 2015-06-08 17:32+0000\n"
+"PO-Revision-Date: 2015-06-08 17:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,11 @@ msgid "Allowed Users Groups"
 msgstr "Groupes d'utilisateurs Autorisés"
 
 #. module: sql_export
+#: field:sql.export,copy_options:0
+msgid "Copy Options"
+msgstr "Copy Options"
+
+#. module: sql_export
 #: view:sql.file.wizard:0
 msgid "Csv File"
 msgstr "Fichier CSV"
@@ -64,10 +69,10 @@ msgid "File Name"
 msgstr "Nom du fichier"
 
 #. module: sql_export
-#: code:addons/sql_export/sql.py:125
+#: code:addons/sql_export/sql_export.py:139
 #, python-format
 msgid "Invalid Query"
-msgstr "Requête Invalide"
+msgstr "Invalid Query"
 
 #. module: sql_export
 #: field:sql.export,name:0
@@ -77,13 +82,13 @@ msgstr "Nom"
 #. module: sql_export
 #: field:sql.export,query:0
 msgid "Query"
-msgstr "Requête"
+msgstr "Query"
 
 #. module: sql_export
 #: model:ir.actions.act_window,name:sql_export.sql_export_tree_action
 #: view:sql.export:0
 msgid "SQL Export"
-msgstr "Export SQL"
+msgstr "SQL Export"
 
 #. module: sql_export
 #: code:_description:0
@@ -97,7 +102,7 @@ msgstr "SQL export"
 #: model:ir.ui.menu,name:sql_export.sql_export_menu
 #: model:ir.ui.menu,name:sql_export.sql_export_menu_view
 msgid "Sql Export"
-msgstr "Export SQL"
+msgstr "Sql Export"
 
 #. module: sql_export
 #: model:res.groups,name:sql_export.group_sql_request_editor
@@ -105,10 +110,10 @@ msgid "Sql Request Editor"
 msgstr "Edition de Requête SQL"
 
 #. module: sql_export
-#: code:addons/sql_export/sql.py:126
+#: code:addons/sql_export/sql_export.py:140
 #, python-format
 msgid "The Sql query is not valid."
-msgstr "La requête SQL n'est pas valide"
+msgstr "The Sql query is not valid."
 
 #. module: sql_export
 #: constraint:sql.export:0
@@ -117,6 +122,6 @@ msgstr "La requête que vous voulez sauvegarder n'est pas autorisée : actions i
 
 #. module: sql_export
 #: help:sql.export,query:0
-msgid "You can't use the following word : delete, drop, create, insert, alter, truncate, execute."
-msgstr "Vous ne pouvez pas utiliser les mots suivants : delete, drop, create, insert, alter, truncate, execute."
+msgid "You can't use the following word : delete, drop, create, insert, alter, truncate, execute, update"
+msgstr "You can't use the following word : delete, drop, create, insert, alter, truncate, execute, update"
 

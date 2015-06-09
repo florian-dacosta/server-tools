@@ -23,13 +23,18 @@
  'version': '0.1',
  'author': 'Akretion,Odoo Community Association (OCA)',
  'website': 'http://www.akretion.com',
+ 'description': """
+Allow to export data in csv files FROM sql requests.
+There are some restrictions in the sql sql request, for example, it has to
+begin by "SELECT
+ """,
  'license': 'AGPL-3',
  'category': 'Generic Modules/Others',
  'summary': 'Export data in csv file with SQL requests',
  'depends': ['base',
              ],
  'data': [
-     'sql_view.xml',
+     'sql_export_view.xml',
      'wizard/wizard_file_view.xml',
      'security/sql_export_security.xml',
      'security/ir.model.access.csv',

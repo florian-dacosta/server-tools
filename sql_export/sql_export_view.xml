@@ -20,6 +20,8 @@
                         <button name="export_sql_query" string="Execute Query" type="object" class="oe_highlight" icon="gtk-execute" colspan="2"/>
                         <label for="query" colspan="1"/>
                         <field name="query" nolabel="1" colspan="4"/>
+                        <label for="Copy Options" colspan="1"/>
+                        <field name="copy_options" nolabel="1" colspan="4"/>
                     </group>
                     <group colspan="2" col="2" groups="sql_export.group_sql_request_editor">
                         <separator string="Allowed Users" colspan="1"/>

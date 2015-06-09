@@ -9,6 +9,14 @@ There are some restrictions in the sql sql request, for example, it has to
 begin by "SELECT"
 A new menu named Export is created.
 
+Bug Tracker
+===========
+
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/maintainer-tools/issues>`_.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
+`here <https://github.com/OCA/maintainer-tools/issues/new?body=module:%20sql_export%0Aversion:%200.1%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+
 Credits
 =======
 

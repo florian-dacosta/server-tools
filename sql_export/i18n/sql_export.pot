@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-08 11:46+0000\n"
-"PO-Revision-Date: 2015-06-08 11:46+0000\n"
+"POT-Creation-Date: 2015-06-08 17:32+0000\n"
+"PO-Revision-Date: 2015-06-08 17:32+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -39,6 +39,11 @@ msgid "Allowed Users Groups"
 msgstr ""
 
 #. module: sql_export
+#: field:sql.export,copy_options:0
+msgid "Copy Options"
+msgstr ""
+
+#. module: sql_export
 #: view:sql.file.wizard:0
 msgid "Csv File"
 msgstr ""
@@ -64,7 +69,7 @@ msgid "File Name"
 msgstr ""
 
 #. module: sql_export
-#: code:addons/sql_export/sql.py:125
+#: code:addons/sql_export/sql_export.py:139
 #, python-format
 msgid "Invalid Query"
 msgstr ""
@@ -105,7 +110,7 @@ msgid "Sql Request Editor"
 msgstr ""
 
 #. module: sql_export
-#: code:addons/sql_export/sql.py:126
+#: code:addons/sql_export/sql_export.py:140
 #, python-format
 msgid "The Sql query is not valid."
 msgstr ""
@@ -117,6 +122,6 @@ msgstr ""
 
 #. module: sql_export
 #: help:sql.export,query:0
-msgid "You can't use the following word : delete, drop, create, insert, alter, truncate, execute."
+msgid "You can't use the following word : delete, drop, create, insert, alter, truncate, execute, update"
 msgstr ""
 

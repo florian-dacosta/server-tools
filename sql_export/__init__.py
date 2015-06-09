@@ -1,2 +1,2 @@
-from . import sql
+from . import sql_export
 from . import wizard
